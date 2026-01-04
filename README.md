@@ -197,7 +197,7 @@ all_markers <- findMarkers(sce, groups=sce$cluster)
 #Generate heat map for alpha cell clusters 
 #Target alpha clusters are 2, 5, and 10. 
 target_clusters <- c("2", "5", "10")
-#Get the top 20 marker genes per cluster using “all_markers” object.
+#Get the top 10 marker genes per cluster using “all_markers” object.
 top_genes <- unique(unlist(lapply(target_clusters, function(x) {
     head(rownames(all_markers[[x]]), 10)
 })))
