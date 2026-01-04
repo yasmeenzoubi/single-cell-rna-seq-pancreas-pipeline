@@ -1,11 +1,10 @@
 # Single Cell RNA-Seq Pancreas Project
 
 ## Introduction/Project Summary
-This project analyzes ~2,000 human pancreatic cells from the Baron single-cell dataset using scater, scran, and UMAP clustering.
-After QC, normalization, and HVG selection, I identified endocrine and exocrine cell groups, specifically mapping INS, GCG, and PNLIP expression to beta, alpha, and acinar cell clusters.
-Louvain clustering revealed multiple healthy and transitional endocrine states, as well as a cluster with possible disease-associated signatures.
-I compared top marker genes across alpha clusters (2, 5, 10) and beta clusters (3, 8, 9), generating heatmaps to interpret cell-state differences, including healthy, transitional, and potentially diabetic/cancer-like profiles.
-This project demonstrates end-to-end scRNA-seq analysis: QC, normalization, PCA/UMAP, clustering, marker discovery, heatmap visualization, and interpretation of endocrine cell biology.
+This project analyzes ~2000 human pancreatic cells from the Baron single-cell dataset using scater, scran, and UMAP clustering.
+After performing the QC, normalization, HVG selection, PCA analysis, and clustering steps, I identified endocrine and exocrine cell groups (alpha, beta, and acinar). I specifically mapped insulin (INS), glucagon (GCG), and lipase (PNLIP) expression to clusters representing these cell types.
+Louvain clustering revealed multiple healthy/normal and transitional endocrine cell states, as well as clusters with possible disease signatures (ex: cancer, diabetes, hypoglycemia, insulin resistance).
+I compared top marker genes across alpha clusters (2, 5, 10) and beta clusters (3, 8, 9), and generating heatmaps to interpret cell-state differences, including healthy, transitional, and potentially diabetic/cancer-like profiles.
 RNA-Seq is a useful tool to analyze the presence of markers in various cellular states. This becomes a key method in identifying certain markers that can appear in normal and healthy disease states. For example, in the pancreatic endocrine environment, an observed difference in insulin expression in different clusters can provide information on how it is expressed in normal vs disease states (insulin resistance, type I/II diabetes, and endocrine pancreatic cancer). The same can be performed in the pancreatic exocrine environment by comparing the difference in lipase expression between normal and disease states (example: exocrine pancreatic cancer or enzyme insufficiency).
 
 ## Install and Load the Required Package
