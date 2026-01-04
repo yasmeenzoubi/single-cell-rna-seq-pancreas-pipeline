@@ -7,14 +7,16 @@ Louvain clustering revealed multiple healthy/normal and transitional endocrine c
 I compared top marker genes across alpha clusters (2, 5, 10) and beta clusters (3, 8, 9), and generating heatmaps to interpret cell-state differences, including healthy, transitional, and potentially diabetic/cancer-like profiles.
 RNA-Seq is a useful tool to analyze the presence of markers in various cellular states. This becomes a key method in identifying certain markers that can appear in normal and healthy disease states. For example, in the pancreatic endocrine environment, an observed difference in insulin expression in different clusters can provide information on how it is expressed in normal vs disease states (insulin resistance, type I/II diabetes, and endocrine pancreatic cancer). The same can be performed in the pancreatic exocrine environment by comparing the difference in lipase expression between normal and disease states (example: exocrine pancreatic cancer or enzyme insufficiency).
 
-## Install and Load the Required Package
+## Install necessary packages
 
 ```r
-#Install necessary packages
-BiocManager::install(c("ExperimentHub", "scater", "scran", " scRNAseq", "AnnotationHub", "ensembldb"))
+BiocManager::install(c("ExperimentHub", "scater", "scran", "scRNAseq", "AnnotationHub", "ensembldb"))
 install.packages(c("ggplot2", "igraph", "pheatmap"))
+```
  	
-#Load necessary packages
+## Load necessary packages
+
+```r
 library(ExperimentHub)
 library(scater)
 library(scran)
@@ -63,7 +65,7 @@ Output
 [1] 20125  2000
 ```
 
-After running the QC step, I still have 2000 cells. This means that the cells at seed 123 have already met the selected threshold and illustrates the high-quality randomly selected cell data.
+After I ran the QC steps, the dataset contains 20,125 genes and 2,000 cells, confirming that all subsampled cells met the set thresholds.
 
 ## Data normalization
 The next step is to normalize the data. Single cell RNA-Seq data is messy. It is necessary to transform the data into an even distribution PCA and statistical analysis. To normalize single cell data, use scran.
@@ -201,6 +203,7 @@ top_genes <- unique(unlist(lapply(target_clusters, function(x) {
     head(rownames(all_markers[[x]]), 10)
 })))
 #Prepare matrix for pheatmap (group cells by cluster)
+#Aggregate single-cell data into "pseudo-bulk" for cleaner heatmap visualization
 cluster_means <- aggregateAcrossCells(sce, ids=sce$cluster, statistics="mean")
 #Subset the group matrix to only include top 10 genes from clusters 2, 5, and 10.
 plot_matrix <- assay(cluster_means)[top_genes, target_clusters]
@@ -213,7 +216,7 @@ pheatmap(mat_scaled, main = "Top Markers: Pancreatic Alpha Cell Clusters 2, 5, &
 ![Top Alpha Genes Heatmap](top_alpha_genes_heatmap.png)
 
 Interpretation: Here the expression profile of each cluster relative to the total 3 varies. These genes are observed to play a role in cell growth, stability, glucagon production, and insulin-glucagon homeostasis.  For example, HIGD1A promotes alpha cell survival and protection from apoptotic signals, SST and TTR promotes the release of glucagon, PPP1R1A is linked to Type 2 diabetes, and SPINK1 prevents the early activation of trypsin enzyme to avoid auto-digestion of pancreatic cells.
-Each cluster expresses these protective and homeostatic genes at high levels, which supports that these are likely healthy and normal pancreatic alpha cell states. Conversely, there is a moderate expression level of PPP1R1A in Clusters 5 and 10 relative to Cluster 2 which might support a Type 2 diabetes connection. However, these clusters express supportive and homeostatic genes are high levels, which is conclusive if healthy and normal alpha cells
+Each cluster expresses these protective and homeostatic genes at high levels, which supports that these are likely healthy and normal pancreatic alpha cell states. Conversely, there is a moderate expression level of PPP1R1A in Clusters 5 and 10 relative to Cluster 2 which might support a Type 2 diabetes connection. However, these clusters express supportive and homeostatic genes are high levels, which is conclusive of healthy and normal alpha cells
 Finally, insulin has a higher expression level within Cluster 2, while Clusters 5 and 10 have higher glucagon levels. Because this expression is relative amongst the 3 populations, therefore Clusters 5 and 10 likely represent normal mature alpha cells and Cluster 2 represents normal alpha-beta (AB) transitional cells due to its low-level glucagon expression and high-level insulin expression.
 
 ```r
@@ -225,6 +228,7 @@ top_genes <- unique(unlist(lapply(target_clusters, function(x) {
     head(rownames(all_markers[[x]]), 10)
 })))
 #Prepare matrix for pheatmap (group cells by cluster)
+#Aggregate single-cell data into "pseudo-bulk" for cleaner heatmap visualization
 cluster_means <- aggregateAcrossCells(sce, ids=sce$cluster, statistics="mean")
 #Subset the group matrix to only include top 10 genes from clusters 3, 8, and 9.
 plot_matrix <- assay(cluster_means)[top_genes, target_clusters]
@@ -301,7 +305,7 @@ ENSG00000115263    GCG        2 162142882 162152404      -
 Interpretation: Lipase (PNLIP) is on chromosome 10 on the positive (+) strand direction between positions 116545931 and 116567855; Insulin (INS) is on chromosome 11 on the negative (-) strand direction between positions 2159779 and 2161221; Glucagon (GCG) is on chromosome 2 on the negative (-) strand direction between positions 162142882 and 162152404. The 3 genes are located on very different chromosomes, which therefore provides strong evidence for their cell-specific expression patterns as observed in the UMAP clusters.
 
 ##Conclusion
-Single-cell RNA-Seq is a useful statistical method to compare various states of the similar cell type, such as early stage, mature, normal, and diseased, through genetic marker expression. In the pancreatic cells example, there are 3 clusters (2, 5, and 10) corresponding to alpha cell states, 3 clusters (3, 8, and 9) corresponding to beta cell states, and a single cluster (1) corresponding to the acinar cell state. By analyzing the top 10 genes expressed in each of the pancreatic alpha and beta cell state clusters via heatmap visualization, it can be concluded that Cluster 2 represents normal alpha-beta (AB) transitional cell state, Clusters 5 and 10 represent normal alpha cell state, Cluster 3 represents a diseased pancreatic state (example: cancer or diabetes), Cluster 8 represents normal beta cell states, and Cluster 9 represents normal alpha-beta (AB) transitional cells states. In research and clinical settings, single-cell RNA-Seq can be used sas a genetic analysis tool to compare the top expressed genes from each cell state cluster. Researchers can identify the genes that contribute to healthy versus disease states and potentially develop gene-based therapies to treat diseases.
+Single-cell RNA-Seq is a useful statistical method to compare various states of the similar cell type, such as early stage, mature, normal, and diseased, through genetic marker expression. In the pancreatic cells example, there are 3 clusters (2, 5, and 10) corresponding to alpha cell states, 3 clusters (3, 8, and 9) corresponding to beta cell states, and a single cluster (1) corresponding to the acinar cell state. By analyzing the top 10 genes expressed in each of the pancreatic alpha and beta cell state clusters via heatmap visualization, it can be concluded that Cluster 2 represents normal alpha-beta (AB) transitional cell state, Clusters 5 and 10 represent normal alpha cell state, Cluster 3 represents a diseased pancreatic state (example: cancer or diabetes), Cluster 8 represents normal beta cell states, and Cluster 9 represents normal alpha-beta (AB) transitional cells states. In research and clinical settings, single-cell RNA-Seq can be used as a genetic analysis tool to compare the top expressed genes from each cell state cluster. Researchers can identify the genes that contribute to healthy versus disease states and potentially develop gene-based therapies to treat diseases.
 
 ##Final Note
 Analysis was performed using the Bioconductor ecosystem (scran, scater, scRNAseq). AI tools were utilized to optimize code syntax and visualization parameters, while analytical interpretations and statistical validations were manually conducted to ensure biological accuracy.
