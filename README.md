@@ -208,7 +208,7 @@ plot_matrix <- assay(cluster_means)[top_genes, target_clusters]
 #Z-score scaling (transforms the data to reflect the marker abundance relative to just the 3 samples rather than the entire set of clusters)
 mat_scaled <- t(scale(t(plot_matrix)))
 #Plot
-pheatmap(mat_scaled, main = "Top Markers: Pancreatic Alpha Cell Clusters 2, 5, & 10", cluster_rows = TRUE, cluster_cols = TRUE, color = colorRampPalette(c("navy", "white", "red"))(100), border_color = NA)
+pheatmap(mat_scaled, main = "Top Markers: Pancreatic Alpha Cell Clusters 2, 5, & 10", cluster_rows = TRUE, cluster_cols = FALSE, angle_col = "0", color = colorRampPalette(c("navy", "white", "red"))(100), border_color = NA)
 ```
 
 ![Top Alpha Genes Heatmap](top_alpha_genes_heatmap.png)
@@ -232,7 +232,7 @@ plot_matrix <- assay(cluster_means)[top_genes, target_clusters]
 #Z-score scaling (transforms the data to reflect the marker abundance relative to just the 3 samples rather than the entire set of clusters)
 mat_scaled <- t(scale(t(plot_matrix)))
 #Plot
-pheatmap(mat_scaled, main = "Top Markers: Pancreatic Beta Cell Clusters 3, 8, & 9", cluster_rows = TRUE, cluster_cols = TRUE, color = colorRampPalette(c("navy", "white", "red"))(100), border_color = NA)
+pheatmap(mat_scaled, main = "Top Markers: Pancreatic Beta Cell Clusters 3, 8, & 9", cluster_rows = TRUE, cluster_cols = FALSE, angle_col = "0", color = colorRampPalette(c("navy", "white", "red"))(100), border_color = NA)
 ```
 
 ![Top Beta Genes Heatmap](top_beta_genes_heatmap.png)
