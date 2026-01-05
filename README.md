@@ -119,7 +119,7 @@ plotUMAP(sce, colour_by="cluster", text_by="cluster")
 
 This UMAP has 11 distinct clusters
 
-##Visualizing Markers in the UMAP
+## Visualizing Markers in the UMAP
 Next I want to find clusters where are 3 genes of interest are present in the dataset.
 
 ```r
@@ -148,7 +148,7 @@ Output
 Next, extract the normalized expression level for the 3 genes of interest for every cell and store the data into a new column in the metadata table.
 
 ```r
-# Add the specific gene expression columns
+#Add the specific gene expression columns
 sce$INS <- as.numeric(logcounts(sce)["INS", ])
 sce$GCG <- as.numeric(logcounts(sce)["GCG", ])
 sce$PNLIP <- as.numeric(logcounts(sce)["PNLIP", ])
@@ -304,10 +304,10 @@ ENSG00000115263    GCG        2 162142882 162152404      -
 
 Interpretation: Lipase (PNLIP) is on chromosome 10 on the positive (+) strand direction between positions 116545931 and 116567855; Insulin (INS) is on chromosome 11 on the negative (-) strand direction between positions 2159779 and 2161221; Glucagon (GCG) is on chromosome 2 on the negative (-) strand direction between positions 162142882 and 162152404. The 3 genes are located on very different chromosomes, which therefore provides strong evidence for their cell-specific expression patterns as observed in the UMAP clusters.
 
-##Conclusion
+## Conclusion
 Single-cell RNA-Seq is a useful statistical method to compare various states of the similar cell type, such as early stage, mature, normal, and diseased, through genetic marker expression. In the pancreatic cells example, there are 3 clusters (2, 5, and 10) corresponding to alpha cell states, 3 clusters (3, 8, and 9) corresponding to beta cell states, and a single cluster (1) corresponding to the acinar cell state. By analyzing the top 10 genes expressed in each of the pancreatic alpha and beta cell state clusters via heatmap visualization, it can be concluded that Cluster 2 represents normal alpha-beta (AB) transitional cell state, Clusters 5 and 10 represent normal alpha cell state, Cluster 3 represents a diseased pancreatic state (example: cancer or diabetes), Cluster 8 represents normal beta cell states, and Cluster 9 represents normal alpha-beta (AB) transitional cells states. In research and clinical settings, single-cell RNA-Seq can be used as a genetic analysis tool to compare the top expressed genes from each cell state cluster. Researchers can identify the genes that contribute to healthy versus disease states and potentially develop gene-based therapies to treat diseases.
 
-##Final Note
+## Final Note
 Analysis was performed using the Bioconductor ecosystem (scran, scater, scRNAseq). AI tools were utilized to optimize code syntax and visualization parameters, while analytical interpretations and statistical validations were manually conducted to ensure biological accuracy.
 
 
