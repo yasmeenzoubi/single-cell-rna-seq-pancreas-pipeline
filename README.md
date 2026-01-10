@@ -50,7 +50,7 @@ sce <- sce[, sample(ncol(sce), min(2000, ncol(sce)))]
 ```
 
 ## Quality Control Step
-The next important step is quality control. The purpose of single-cell RNA-Seq analysis is to remove “noise” and cellular data with low counts or poor-quality results. Performing this QC steps allows for analysis optimization. There are many different QC test to perform on cell datasets, such as removing cell data containing large mitochondria as this indicates cell death and damage. However, I want to keep it simple and filter for low cell counts.
+The next important step is scater quality control. The purpose of single-cell RNA-Seq analysis is to remove “noise” and cellular data with low counts or poor-quality results. Performing this QC steps allows for analysis optimization. There are many different QC test to perform on cell datasets, such as removing cell data containing large mitochondria as this indicates cell death and damage. However, I want to keep it simple and filter for low cell counts.
 
 ```r
 #This step will add the new calculated QC metrics for each cell and add them as extra columns in the metadata table of the SingleCellExperiment object.
