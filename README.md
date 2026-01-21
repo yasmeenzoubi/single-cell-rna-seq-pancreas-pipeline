@@ -117,7 +117,23 @@ plotUMAP(sce, colour_by="cluster", text_by="cluster")
 
 ![UMAP plot](overall_umap.png)
 
-This UMAP has 11 distinct clusters
+To view the UMAP with each cluster labeled with the cell type, run the code below:
+
+```r
+#View columns
+colnames(colData(sce))
+```
+Output
+```text
+[1] "donor"      "label"      "sum"        "detected"  
+[5] "total"      "sizeFactor" "cluster"   
+```
+```r
+#Color the UMAP by cell type labels (ex: alpha, beta, acinar)
+plotUMAP(sce, colour_by = "label")
+```
+
+![UMAP plot labeled](overall_umap_labeled.png)
 
 ## Visualizing Markers in the UMAP
 Next I want to find clusters where are 3 genes of interest are present in the dataset.
