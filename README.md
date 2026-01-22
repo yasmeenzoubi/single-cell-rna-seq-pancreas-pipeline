@@ -111,15 +111,6 @@ sce$cluster <- factor(igraph::cluster_louvain(g)$membership)
 Now that all the data is ready, the next step is to plot the UMAP where each cluster represents a cell state
 
 ```r
-#Plot the UMAP (color-coded and numbered)
-plotUMAP(sce, colour_by="cluster", text_by="cluster")
-```
-
-![UMAP plot](overall_umap.png)
-
-To view the UMAP with each cluster labeled with the cell type, run the code below:
-
-```r
 #View columns
 colnames(colData(sce))
 ```
@@ -128,6 +119,15 @@ Output
 [1] "donor"      "label"      "sum"        "detected"  
 [5] "total"      "sizeFactor" "cluster"   
 ```
+```r
+#Plot the UMAP (color-coded and numbered by cluster)
+plotUMAP(sce, colour_by="cluster", text_by="cluster")
+```
+
+![UMAP plot](overall_umap.png)
+
+To view the UMAP with each cluster labeled with the cell type, run the code below:
+
 ```r
 #Color the UMAP by cell type labels (ex: alpha, beta, acinar)
 plotUMAP(sce, colour_by = "label")
