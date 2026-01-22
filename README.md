@@ -37,7 +37,6 @@ eh <- ExperimentHub()
 # Load the data. Here the Baron Pancreas Database, a large dataset of human and mouse pancreatic tissue single-cell RNA-sequencing data, will be used.
 # This will automatically download the data from ExperimentHub
 sce <- BaronPancreasData('human') 
-#Note that this database contains many cells! Loading and analyzing the entire number of cells will be very time consuming. To simplify the process, subset a small sample of cells ~2000.
 ```
 
 ## Subset to ~2000 cells.
